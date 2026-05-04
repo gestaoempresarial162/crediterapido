@@ -1,0 +1,23 @@
+[build]
+  publish = "."
+
+# Headers de segurança em todas as páginas
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+# Bloqueia acesso direto ao painel CRM por URL
+[[redirects]]
+  from = "/crm-painel.html"
+  to = "/404.html"
+  status = 302
+
+# Redireciona /blog/nome-do-artigo para o arquivo correto
+[[redirects]]
+  from = "/blog/:slug"
+  to = "/blog/:slug.html"
+  status = 200
