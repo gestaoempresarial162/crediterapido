@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ✅ SEO BÁSICO -->
+<title>CréditoRápido — Empréstimo Pessoal Aprovado em Minutos | Simule Grátis</title>
+<meta name="description" content="Compare as melhores ofertas de empréstimo pessoal do Brasil. Aprovação em até 2 minutos, mesmo com restrição no CPF. Simule grátis agora — sem burocracia.">
+<meta name="keywords" content="empréstimo pessoal, crédito rápido, empréstimo online, crédito com nome sujo, empréstimo sem burocracia, simular empréstimo, score baixo">
+<meta name="robots" content="index, follow">
+<meta name="author" content="CréditoRápido">
+
+<!-- ✅ CANONICAL -->
+<link rel="canonical" href="https://www.crediterapido.com.br/">
+
+<!-- ✅ OPEN GRAPH (WhatsApp, Facebook, LinkedIn) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.crediterapido.com.br/">
+<meta property="og:title" content="CréditoRápido — Empréstimo Aprovado em Minutos">
+<meta property="og:description" content="Compare as melhores ofertas de crédito do Brasil. Aprovação em 2 minutos, mesmo com restrição no CPF. Simule grátis.">
+<meta property="og:image" content="https://www.crediterapido.com.br/og-image.jpg">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="CréditoRápido">
+
+<!-- ✅ TWITTER CARDS -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CréditoRápido — Empréstimo Aprovado em Minutos">
+<meta name="twitter:description" content="Compare as melhores ofertas de crédito. Aprovação em 2 minutos.">
+<meta name="twitter:image" content="https://www.crediterapido.com.br/og-image.jpg">
+
+<!-- ✅ PERFORMANCE: preconnect para Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+<!-- ✅ GOOGLE ADSENSE — substitua ca-pub-XXXXXXXXXXXXXXXX pelo seu Publisher ID -->
+<script src="crm.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
+<!-- ✅ SCHEMA.ORG — JSON-LD para rich snippets no Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FinancialService",
+  "name": "CréditoRápido",
+  "url": "https://www.crediterapido.com.br",
+  "logo": "https://www.crediterapido.com.br/logo.png",
+  "description": "Plataforma de comparação de empréstimos pessoais com aprovação em minutos.",
+  "areaServed": "BR",
+  "serviceType": "Empréstimo Pessoal",
+  "offers": {
+    "@type": "Offer",
+    "description": "Compare gratuitamente as melhores ofertas de crédito do mercado",
+    "price": "0",
+    "priceCurrency": "BRL"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "2340"
+  }
+}
+</script>
+
+<style>
+  :root {
+    --verde: #00C875;
+    --verde-escuro: #00A35C;
+    --azul: #0A1628;
+    --azul-medio: #102040;
+    --cinza: #8A9BB0;
+    --branco: #F4F8FF;
+    --acento: #FFD166;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--azul);
+    color: var(--branco);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,22,40,0.95);
+    backdrop-filter: blur(12px);
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.5px;
+  }
+  .logo span { color: var(--verde); }
+
+  .nav-badge {
+    background: rgba(0,200,117,0.12);
+    border: 1px solid rgba(0,200,117,0.3);
+    color: var(--verde);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  /* HERO */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    padding: 80px 48px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,209,102,0.1);
+    border: 1px solid rgba(255,209,102,0.25);
+    color: var(--acento);
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  /* ✅ H1 SEMÂNTICO com atributos SEO */
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(36px, 5vw, 58px);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -1.5px;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--verde);
+    position: relative;
+  }
+
+  .hero p {
+    font-size: 17px;
+    color: var(--cinza);
+    line-height: 1.7;
+    margin-bottom: 36px;
+    font-weight: 300;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .stat { display: flex; flex-direction: column; }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--branco);
+  }
+  .stat-label { font-size: 12px; color: var(--cinza); font-weight: 400; }
+
+  /* FORM CARD */
+  .form-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 24px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .form-card::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(0,200,117,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .form-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .form-subtitle { font-size: 13px; color: var(--cinza); margin-bottom: 28px; }
+
+  .form-group { margin-bottom: 16px; }
+
+  .form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--cinza);
+    margin-bottom: 7px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  .form-group input, .form-group select {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 13px 16px;
+    color: var(--branco);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus, .form-group select:focus { border-color: var(--verde); }
+  .form-group select option { background: var(--azul-medio); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .btn-primary {
+    width: 100%;
+    background: var(--verde);
+    color: var(--azul);
+    border: none;
+    border-radius: 12px;
+    padding: 16px;
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s, transform 0.1s;
+    letter-spacing: -0.3px;
+  }
+
+  .btn-primary:hover { background: var(--verde-escuro); transform: translateY(-1px); }
+
+  .form-security {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    justify-content: center;
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--cinza);
+  }
+
+  /* TRUST BAR */
+  .trust-bar {
+    border-top: 1px solid rgba(255,255,255,0.07);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    padding: 28px 48px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--cinza);
+  }
+
+  .trust-item .icon { font-size: 20px; }
+  .trust-item strong { color: var(--branco); }
+
+  /* SECTIONS */
+  .section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 48px;
+  }
+
+  .section-tag {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--verde);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+  }
+
+  .section-sub {
+    color: var(--cinza);
+    font-size: 16px;
+    font-weight: 300;
+    margin-bottom: 56px;
+    max-width: 500px;
+  }
+
+  /* ✅ STEPS — responsivo */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+  }
+
+  .step {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px;
+    padding: 32px;
+    transition: border-color 0.2s;
+  }
+
+  .step:hover { border-color: rgba(0,200,117,0.3); }
+
+  .step-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+    color: rgba(0,200,117,0.15);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .step h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .step p { font-size: 14px; color: var(--cinza); line-height: 1.6; }
+
+  /* ✅ AD SLOTS — responsivos com data-attributes do AdSense */
+  .ad-wrapper {
+    padding: 20px 48px;
+    text-align: center;
+  }
+
+  .ad-wrapper ins {
+    display: block;
+    width: 100%;
+  }
+
+  /* ✅ ARTICLES — responsivo */
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .article-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 24px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .article-card:hover {
+    border-color: rgba(0,200,117,0.2);
+    background: rgba(0,200,117,0.04);
+    transform: translateY(-2px);
+  }
+
+  .article-tag {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--verde);
+    margin-bottom: 10px;
+  }
+
+  .article-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+
+  .article-card p { font-size: 13px; color: var(--cinza); line-height: 1.5; }
+
+  .article-read {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    color: var(--verde);
+    font-weight: 500;
+    margin-top: 16px;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding: 40px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
+
+  .footer-links a {
+    color: var(--cinza);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--branco); }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero > * { animation: fadeUp 0.6s ease both; }
+  .hero > *:nth-child(2) { animation-delay: 0.15s; }
+
+  .pulse {
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: var(--verde);
+    border-radius: 50%;
+    margin-right: 4px;
+    animation: pulse 2s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  /* ✅ RESPONSIVIDADE — MOBILE FIRST */
+  @media (max-width: 900px) {
+    nav { padding: 16px 20px; }
+
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding: 48px 20px 40px;
+    }
+
+    .trust-bar { padding: 20px; gap: 20px; }
+    .trust-item { font-size: 13px; }
+
+    .section { padding: 60px 20px; }
+
+    .form-card { padding: 28px 20px; }
+    .form-row { grid-template-columns: 1fr; }
+
+    .ad-wrapper { padding: 16px 20px; }
+
+    footer {
+      padding: 32px 20px;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .footer-links { gap: 16px; }
+  }
+
+  @media (max-width: 480px) {
+    .logo { font-size: 18px; }
+    .nav-badge { font-size: 11px; padding: 5px 12px; }
+    .hero-stats { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo" aria-label="CréditoRápido">crédito<span>rápido</span></div>
+  <div class="nav-badge"><span class="pulse" aria-hidden="true"></span> Aprovações em tempo real</div>
+</nav>
+
+<!-- HERO -->
+<section aria-label="Seção principal" style="background: radial-gradient(ellipse at 60% 0%, rgba(0,200,117,0.08) 0%, transparent 60%);">
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">⚡ Resposta em até 2 minutos</div>
+
+      <!-- ✅ H1 SEMÂNTICO com palavras-chave -->
+      <h1>Empréstimo pessoal<br>aprovado sem <em>burocracia</em></h1>
+
+      <p>Compare as melhores ofertas de crédito do mercado e descubra quanto você pode receber hoje — mesmo com restrições no CPF.</p>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">+47mil</span>
+          <span class="stat-label">Créditos aprovados</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">2min</span>
+          <span class="stat-label">Tempo de resposta</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">94%</span>
+          <span class="stat-label">Taxa de aprovação</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMULÁRIO -->
+    <div class="form-card" role="region" aria-label="Formulário de simulação de crédito">
+      <div class="form-title">Simule agora, é grátis</div>
+      <div class="form-subtitle">Preencha os dados e receba sua oferta em instantes</div>
+
+      <!-- ✅ action/method + name/id em todos os campos -->
+      <form action="#" method="post" novalidate>
+        <div class="form-group">
+          <label for="nome">Nome completo</label>
+          <input type="text" id="nome" name="nome" placeholder="Seu nome completo" autocomplete="name" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cpf">CPF</label>
+            <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" autocomplete="off" inputmode="numeric" required>
+          </div>
+          <div class="form-group">
+            <label for="celular">Celular</label>
+            <input type="tel" id="celular" name="celular" placeholder="(00) 00000-0000" autocomplete="tel" inputmode="numeric" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="valor">Valor desejado</label>
+            <select id="valor" name="valor" required>
+              <option value="500-1000">R$ 500 – R$ 1.000</option>
+              <option value="1000-3000">R$ 1.000 – R$ 3.000</option>
+              <option value="3000-5000">R$ 3.000 – R$ 5.000</option>
+              <option value="5000-10000">R$ 5.000 – R$ 10.000</option>
+              <option value="10000+">Acima de R$ 10.000</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="renda">Tipo de renda</label>
+            <select id="renda" name="renda" required>
+              <option value="clt">CLT / Empregado</option>
+              <option value="autonomo">Autônomo / MEI</option>
+              <option value="aposentado">Aposentado / INSS</option>
+              <option value="servidor">Servidor Público</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary">→ Verificar minha aprovação</button>
+      </form>
+
+      <div class="form-security" aria-label="Segurança dos dados">🔒 Seus dados estão protegidos · LGPD</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar" aria-label="Diferenciais">
+  <div class="trust-item"><span class="icon" aria-hidden="true">🏦</span> <span><strong>+30 instituições</strong> parceiras</span></div>
+  <div class="trust-item"><span class="icon" aria-hidden="true">🔒</span> <span><strong>100% seguro</strong> e criptografado</span></div>
+  <div class="trust-item"><span class="icon" aria-hidden="true">📱</span> <span><strong>Sem burocracia</strong> presencial</span></div>
+  <div class="trust-item"><span class="icon" aria-hidden="true">✅</span> <span><strong>Gratuito</strong> para o usuário</span></div>
+</div>
+
+<!-- ✅ AD SLOT 1 — Leaderboard responsivo (substitua o data-ad-slot pelo seu) -->
+<div class="ad-wrapper" style="margin-top: 40px;" aria-label="Publicidade">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+       data-ad-slot="XXXXXXXXXX"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- COMO FUNCIONA -->
+<section class="section" aria-labelledby="como-funciona-titulo">
+  <div class="section-tag">Como funciona</div>
+  <h2 class="section-title" id="como-funciona-titulo">Da simulação ao<br>dinheiro na conta</h2>
+  <p class="section-sub">Processo 100% digital, sem visita a agência ou papelada física.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num" aria-hidden="true">01</div>
+      <h3>Preencha o formulário</h3>
+      <p>Informe dados básicos como CPF, renda e valor desejado. Leva menos de 1 minuto.</p>
+    </div>
+    <div class="step">
+      <div class="step-num" aria-hidden="true">02</div>
+      <h3>Receba as ofertas</h3>
+      <p>Comparamos as taxas de mais de 30 instituições financeiras e mostramos as melhores opções para você.</p>
+    </div>
+    <div class="step">
+      <div class="step-num" aria-hidden="true">03</div>
+      <h3>Assine digitalmente</h3>
+      <p>Escolha a oferta ideal, assine pelo celular e o dinheiro cai na sua conta em até 24h.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG PREVIEW -->
+<section class="section" style="padding-top: 0;" aria-labelledby="blog-titulo">
+  <div class="section-tag">Blog & Guias</div>
+  <h2 class="section-title" id="blog-titulo">Aprenda a usar<br>o crédito a seu favor</h2>
+  <p class="section-sub">Conteúdo gratuito para você tomar decisões financeiras mais inteligentes.</p>
+
+  <div class="articles-grid">
+    <!-- ✅ article-card como <a> para SEO e acessibilidade -->
+    <a href="/blog/credito-com-nome-sujo" class="article-card">
+      <div class="article-tag">Empréstimo Pessoal</div>
+      <!-- ✅ h3 (hierarquia correta: h1 > h2 > h3) -->
+      <h3>Como conseguir crédito com nome sujo em 2025</h3>
+      <p>Saiba quais instituições aprovam mesmo com restrição no CPF e como aumentar suas chances.</p>
+      <div class="article-read" aria-label="Ler artigo completo">Ler artigo →</div>
+    </a>
+    <a href="/blog/aumentar-score" class="article-card">
+      <div class="article-tag">Score</div>
+      <h3>Score baixo: 7 formas comprovadas de aumentar rápido</h3>
+      <p>Estratégias práticas que já ajudaram milhares de brasileiros a sair do vermelho no Serasa.</p>
+      <div class="article-read" aria-label="Ler artigo completo">Ler artigo →</div>
+    </a>
+    <a href="/blog/emprestimo-consignado-guia" class="article-card">
+      <div class="article-tag">Consignado</div>
+      <h3>Empréstimo consignado: guia completo para 2025</h3>
+      <p>Tudo que você precisa saber sobre taxas, limites e como simular o desconto em folha.</p>
+      <div class="article-read" aria-label="Ler artigo completo">Ler artigo →</div>
+    </a>
+  </div>
+</section>
+
+<!-- ✅ AD SLOT 2 — responsivo (substitua o data-ad-slot pelo seu) -->
+<div class="ad-wrapper" style="margin-bottom: 40px;" aria-label="Publicidade">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+       data-ad-slot="XXXXXXXXXX"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<footer>
+  <div class="logo" style="font-size: 18px;" aria-label="CréditoRápido">crédito<span style="color: var(--verde);">rápido</span></div>
+  <nav class="footer-links" aria-label="Links do rodapé">
+    <a href="/privacidade">Política de Privacidade</a>
+    <a href="/termos">Termos de Uso</a>
+    <a href="/sobre">Sobre nós</a>
+    <a href="/contato">Contato</a>
+    <a href="/blog">Blog</a>
+  </nav>
+  <div class="footer-copy">© 2025 CréditoRápido · CNPJ: 00.000.000/0001-00</div>
+</footer>
+
+
+<script>
+// ── CRM: captura do formulário da home ──────────────────────────────────
+document.querySelector('form').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const nome    = document.getElementById('nome').value.trim();
+  const cpf     = document.getElementById('cpf').value.trim();
+  const celular = document.getElementById('celular').value.trim();
+  const valor   = document.getElementById('valor').value;
+  const renda   = document.getElementById('renda').value;
+
+  // Validação mínima
+  if (!nome || !cpf || !celular) {
+    alert('Por favor, preencha nome, CPF e celular.');
+    return;
+  }
+
+  // Salva no CRM
+  CRM.capturar({ nome, cpf, celular, valor, renda }, 'formulario_home');
+
+  // Feedback visual no botão
+  const btn = this.querySelector('.btn-primary');
+  btn.textContent = '✅ Recebido! Verificando...';
+  btn.disabled = true;
+
+  // Redireciona para o simulador após 1s (funil: lead → simulação → artigo)
+  setTimeout(() => {
+    window.location.href = '/simulador-emprestimo/';
+  }, 1200);
+});
+</script>
+</body>
+</html>
