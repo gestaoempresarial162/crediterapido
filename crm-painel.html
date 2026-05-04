@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRM — CréditoRápido</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde:#00C875; --verde-e:#00A35C; --azul:#0A1628; --azul-c:#0F1E35;
+    --cinza:#7A8FA8; --branco:#F0F6FF; --border:rgba(255,255,255,0.08);
+    --font-d:'Syne',sans-serif; --font-b:'DM Sans',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--font-b);background:var(--azul);color:var(--branco);min-height:100vh;}
+
+  /* HEADER */
+  header{display:flex;justify-content:space-between;align-items:center;padding:20px 32px;border-bottom:1px solid var(--border);background:rgba(10,22,40,0.95);position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);}
+  .logo{font-family:var(--font-d);font-weight:800;font-size:18px;}
+  .logo span{color:var(--verde);}
+  .header-right{display:flex;align-items:center;gap:12px;}
+
+  /* BOTÕES */
+  .btn{padding:9px 20px;border-radius:10px;border:none;font-family:var(--font-b);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;}
+  .btn-verde{background:var(--verde);color:var(--azul);font-weight:700;}
+  .btn-verde:hover{background:var(--verde-e);}
+  .btn-ghost{background:rgba(255,255,255,0.06);color:var(--branco);border:1px solid var(--border);}
+  .btn-ghost:hover{background:rgba(255,255,255,0.10);}
+  .btn-danger{background:rgba(255,80,80,0.12);color:#ff7070;border:1px solid rgba(255,80,80,0.2);}
+  .btn-danger:hover{background:rgba(255,80,80,0.20);}
+
+  /* MAIN */
+  main{max-width:1200px;margin:0 auto;padding:32px 24px 80px;}
+
+  /* STATS BAR */
+  .stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:28px;}
+  .stat-card{background:var(--azul-c);border:1px solid var(--border);border-radius:14px;padding:18px 20px;}
+  .stat-card__label{font-size:11px;color:var(--cinza);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;}
+  .stat-card__val{font-family:var(--font-d);font-size:26px;font-weight:800;}
+  .stat-card__val.verde{color:var(--verde);}
+  .stat-card__val.amarelo{color:#FFD166;}
+  .stat-card__val.azul{color:#5BA4FF;}
+
+  /* FILTROS */
+  .filtros{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;align-items:center;}
+  .filtros input, .filtros select{
+    background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:9px;
+    padding:8px 14px;color:var(--branco);font-family:var(--font-b);font-size:13px;outline:none;
+    transition:border-color .2s;
+  }
+  .filtros input{min-width:220px;}
+  .filtros input:focus,.filtros select:focus{border-color:var(--verde);}
+  .filtros select option{background:var(--azul-c);}
+
+  /* TABELA */
+  .table-wrap{background:var(--azul-c);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
+  .leads-table{width:100%;border-collapse:collapse;font-size:13px;}
+  .leads-table th{
+    background:rgba(255,255,255,0.04);color:var(--cinza);font-weight:600;font-size:11px;
+    text-transform:uppercase;letter-spacing:.04em;padding:12px 16px;text-align:left;
+    border-bottom:1px solid var(--border);white-space:nowrap;
+  }
+  .leads-table td{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.04);vertical-align:middle;}
+  .leads-table tr:last-child td{border-bottom:none;}
+  .leads-table tr:hover td{background:rgba(255,255,255,0.025);}
+
+  .td-nome{font-weight:500;}
+  .td-cpf,.td-cel{font-size:12px;color:var(--cinza);}
+  .td-val{font-family:var(--font-d);font-weight:700;font-size:13px;}
+  .td-data{font-size:11px;color:var(--cinza);}
+
+  /* BADGES de status */
+  .badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:700;}
+  .badge-novo{background:rgba(91,164,255,0.15);color:#5BA4FF;}
+  .badge-contatado{background:rgba(255,209,102,0.15);color:#FFD166;}
+  .badge-convertido{background:rgba(0,200,117,0.15);color:var(--verde);}
+  .badge-descartado{background:rgba(255,255,255,0.06);color:var(--cinza);}
+
+  /* SELECT de status inline */
+  .sel-status{
+    background:transparent;border:none;color:inherit;font-family:var(--font-b);font-size:11px;
+    font-weight:700;cursor:pointer;outline:none;padding:0;
+  }
+
+  /* ORIGEM badge pequeno */
+  .orig{font-size:10px;background:rgba(255,255,255,0.06);padding:2px 8px;border-radius:100px;color:var(--cinza);}
+
+  /* SIMULAÇÃO inline */
+  .sim-info{font-size:11px;color:var(--cinza);line-height:1.5;}
+  .sim-info strong{color:var(--branco);}
+
+  /* ACTIONS */
+  .td-actions{white-space:nowrap;}
+  .act-btn{background:none;border:none;color:var(--cinza);cursor:pointer;font-size:14px;padding:4px 6px;border-radius:6px;transition:all .15s;}
+  .act-btn:hover{background:rgba(255,255,255,0.06);color:var(--branco);}
+  .act-btn.del:hover{color:#ff7070;}
+
+  /* VAZIO */
+  .empty-state{text-align:center;padding:60px 24px;color:var(--cinza);}
+  .empty-state .icon{font-size:40px;margin-bottom:16px;}
+  .empty-state p{font-size:15px;}
+
+  /* MODAL de notas */
+  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;z-index:999;display:none;}
+  .modal-overlay.open{display:flex;}
+  .modal{background:var(--azul-c);border:1px solid var(--border);border-radius:20px;padding:28px;width:100%;max-width:440px;}
+  .modal h3{font-family:var(--font-d);font-size:18px;margin-bottom:16px;}
+  .modal textarea{
+    width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:10px;
+    padding:12px;color:var(--branco);font-family:var(--font-b);font-size:13px;resize:vertical;
+    min-height:100px;outline:none;
+  }
+  .modal textarea:focus{border-color:var(--verde);}
+  .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px;}
+
+  /* PAGINAÇÃO */
+  .paginacao{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:20px;font-size:13px;color:var(--cinza);}
+  .pag-btn{background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:6px 14px;color:var(--branco);cursor:pointer;font-size:13px;}
+  .pag-btn:hover{background:rgba(255,255,255,0.10);}
+  .pag-btn:disabled{opacity:.3;cursor:default;}
+
+  @media(max-width:768px){
+    header{padding:16px 20px;}
+    main{padding:20px 16px 60px;}
+    .leads-table th:nth-child(4),.leads-table td:nth-child(4),
+    .leads-table th:nth-child(5),.leads-table td:nth-child(5){display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">crédito<span>rápido</span> <span style="font-size:12px;font-weight:400;color:var(--cinza);margin-left:8px;">CRM</span></div>
+  <div class="header-right">
+    <button class="btn btn-ghost" onclick="CRM.exportarCSV()">⬇ Exportar CSV</button>
+    <button class="btn btn-danger" onclick="limparTudo()">🗑 Limpar tudo</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- STATS -->
+  <div class="stats-bar" id="stats-bar"></div>
+
+  <!-- FILTROS -->
+  <div class="filtros">
+    <input type="text" id="busca" placeholder="🔍  Buscar por nome, CPF ou celular…" oninput="renderizar()">
+    <select id="filtro-status" onchange="renderizar()">
+      <option value="">Todos os status</option>
+      <option value="novo">Novo</option>
+      <option value="contatado">Contatado</option>
+      <option value="convertido">Convertido</option>
+      <option value="descartado">Descartado</option>
+    </select>
+    <select id="filtro-origem" onchange="renderizar()">
+      <option value="">Todas as origens</option>
+      <option value="formulario_home">Formulário Home</option>
+      <option value="simulador">Simulador</option>
+    </select>
+    <span id="contagem" style="font-size:12px;color:var(--cinza);margin-left:auto;"></span>
+  </div>
+
+  <!-- TABELA -->
+  <div class="table-wrap">
+    <table class="leads-table">
+      <thead>
+        <tr>
+          <th>Lead</th>
+          <th>Contato</th>
+          <th>Perfil</th>
+          <th>Simulação</th>
+          <th>Origem / Data</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <div class="empty-state" id="empty" style="display:none;">
+      <div class="icon">📋</div>
+      <p>Nenhum lead encontrado.<br>Os leads aparecem aqui quando alguém preenche o formulário.</p>
+    </div>
+  </div>
+
+  <div class="paginacao" id="paginacao"></div>
+
+</main>
+
+<!-- MODAL NOTAS -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h3>📝 Notas do lead</h3>
+    <textarea id="modal-notas" placeholder="Anotações internas sobre este lead…"></textarea>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="fecharModal()">Cancelar</button>
+      <button class="btn btn-verde" onclick="salvarNota()">Salvar nota</button>
+    </div>
+  </div>
+</div>
+
+<script src="crm.js"></script>
+<script>
+// ─── DADOS DE DEMO (para testar o painel sem precisar de formulário) ───
+function seedDemo() {
+  if (localStorage.getItem('cr_leads')) return; // não sobrescreve dados reais
+  const demos = [
+    { nome:'João Silva', cpf:'123.456.789-00', celular:'(11) 99999-0001', valor:'R$ 1.000 – R$ 3.000', renda:'CLT / Empregado' },
+    { nome:'Maria Oliveira', cpf:'987.654.321-00', celular:'(21) 98888-0002', valor:'R$ 5.000 – R$ 10.000', renda:'Aposentado / INSS' },
+    { nome:'Carlos Souza', cpf:'111.222.333-44', celular:'(31) 97777-0003', valor:'R$ 500 – R$ 1.000', renda:'Autônomo / MEI' },
+  ];
+  demos.forEach((d, i) => {
+    const lead = CRM.capturar(d, i === 0 ? 'formulario_home' : 'simulador');
+    if (i === 1) CRM.atualizarStatus(lead.id, 'contatado');
+    if (i === 2) { CRM.salvarSimulacao({ valor: 2000, prazo: 24, taxa: 3.5, parcela: 'R$ 113,51', total: 'R$ 2.724,28' }); }
+  });
+}
+seedDemo();
+
+// ─── RENDER ───────────────────────────────────────────────────────────
+const POR_PAGINA = 20;
+let paginaAtual = 1;
+let modalLeadId = null;
+
+function statusBadge(s) {
+  const map = { novo:'badge-novo', contatado:'badge-contatado', convertido:'badge-convertido', descartado:'badge-descartado' };
+  const label = { novo:'Novo', contatado:'Contatado', convertido:'Convertido', descartado:'Descartado' };
+  return `<span class="badge ${map[s]||'badge-novo'}">${label[s]||s}</span>`;
+}
+
+function fmtData(iso) {
+  if (!iso) return '—';
+  return new Date(iso).toLocaleString('pt-BR', { day:'2-digit', month:'2-digit', year:'2-digit', hour:'2-digit', minute:'2-digit' });
+}
+
+function filtrar() {
+  const busca = document.getElementById('busca').value.toLowerCase();
+  const st = document.getElementById('filtro-status').value;
+  const orig = document.getElementById('filtro-origem').value;
+  return CRM.todos().filter(l => {
+    const txt = (l.nome+l.cpf+l.celular).toLowerCase();
+    return (!busca || txt.includes(busca)) && (!st || l.status === st) && (!orig || l.origem === orig);
+  });
+}
+
+function renderStats() {
+  const all = CRM.todos();
+  const total = all.length;
+  const novos = all.filter(l => l.status === 'novo').length;
+  const conv  = all.filter(l => l.status === 'convertido').length;
+  const taxa  = total ? Math.round(conv/total*100) : 0;
+  document.getElementById('stats-bar').innerHTML = `
+    <div class="stat-card"><div class="stat-card__label">Total de leads</div><div class="stat-card__val">${total}</div></div>
+    <div class="stat-card"><div class="stat-card__label">Novos</div><div class="stat-card__val azul">${novos}</div></div>
+    <div class="stat-card"><div class="stat-card__label">Convertidos</div><div class="stat-card__val verde">${conv}</div></div>
+    <div class="stat-card"><div class="stat-card__label">Taxa de conv.</div><div class="stat-card__val amarelo">${taxa}%</div></div>
+  `;
+}
+
+function renderizar() {
+  renderStats();
+  const lista = filtrar();
+  const total = lista.length;
+  const maxPag = Math.ceil(total / POR_PAGINA) || 1;
+  if (paginaAtual > maxPag) paginaAtual = maxPag;
+  const slice = lista.slice((paginaAtual-1)*POR_PAGINA, paginaAtual*POR_PAGINA);
+
+  document.getElementById('contagem').textContent = total + ' lead' + (total!==1?'s':'');
+  document.getElementById('empty').style.display = total === 0 ? 'block' : 'none';
+
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = slice.map(l => `
+    <tr>
+      <td class="td-nome">${escHtml(l.nome||'—')}</td>
+      <td>
+        <div class="td-cpf">${escHtml(l.cpf||'—')}</div>
+        <div class="td-cel">${escHtml(l.celular||'—')}</div>
+      </td>
+      <td>
+        <div class="td-val" style="font-size:12px;">${escHtml(l.valor||'—')}</div>
+        <div style="font-size:11px;color:var(--cinza);">${escHtml(l.renda||'—')}</div>
+      </td>
+      <td>
+        ${l.simulacao
+          ? `<div class="sim-info"><strong>${escHtml(l.simulacao.parcela||'—')}</strong>/mês<br>${escHtml(l.simulacao.prazo||'')} meses · ${escHtml(String(l.simulacao.taxa||''))}% a.m.</div>`
+          : '<span style="font-size:11px;color:var(--cinza);">Não simulou</span>'}
+      </td>
+      <td>
+        <div class="orig">${escHtml(l.origem||'—')}</div>
+        <div class="td-data" style="margin-top:4px;">${fmtData(l.criadoEm)}</div>
+      </td>
+      <td>
+        <select class="sel-status badge ${statusBadgeClass(l.status)}" onchange="mudarStatus('${l.id}', this.value)">
+          <option value="novo" ${l.status==='novo'?'selected':''}>Novo</option>
+          <option value="contatado" ${l.status==='contatado'?'selected':''}>Contatado</option>
+          <option value="convertido" ${l.status==='convertido'?'selected':''}>Convertido</option>
+          <option value="descartado" ${l.status==='descartado'?'selected':''}>Descartado</option>
+        </select>
+      </td>
+      <td class="td-actions">
+        <button class="act-btn" title="Notas" onclick="abrirModal('${l.id}')">📝</button>
+        <button class="act-btn del" title="Excluir" onclick="excluir('${l.id}')">🗑</button>
+      </td>
+    </tr>
+  `).join('');
+
+  // Paginação
+  const pag = document.getElementById('paginacao');
+  if (maxPag <= 1) { pag.innerHTML = ''; return; }
+  pag.innerHTML = `
+    <button class="pag-btn" onclick="irPag(${paginaAtual-1})" ${paginaAtual===1?'disabled':''}>← Anterior</button>
+    <span>Página ${paginaAtual} de ${maxPag}</span>
+    <button class="pag-btn" onclick="irPag(${paginaAtual+1})" ${paginaAtual===maxPag?'disabled':''}>Próxima →</button>
+  `;
+}
+
+function statusBadgeClass(s) {
+  return { novo:'badge-novo', contatado:'badge-contatado', convertido:'badge-convertido', descartado:'badge-descartado' }[s] || 'badge-novo';
+}
+
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function irPag(n) { paginaAtual = n; renderizar(); window.scrollTo(0,0); }
+
+// ─── AÇÕES ────────────────────────────────────────────────────────────
+function mudarStatus(id, status) {
+  CRM.atualizarStatus(id, status);
+  renderizar();
+}
+
+function excluir(id) {
+  if (!confirm('Excluir este lead?')) return;
+  const lista = CRM.todos().filter(l => l.id !== id);
+  localStorage.setItem('cr_leads', JSON.stringify(lista));
+  renderizar();
+}
+
+function limparTudo() {
+  if (!confirm('Apagar TODOS os leads? Esta ação não pode ser desfeita.')) return;
+  localStorage.removeItem('cr_leads');
+  renderizar();
+}
+
+function abrirModal(id) {
+  modalLeadId = id;
+  const lead = CRM.todos().find(l => l.id === id);
+  document.getElementById('modal-notas').value = lead?.notas || '';
+  document.getElementById('modal').classList.add('open');
+}
+
+function fecharModal() {
+  document.getElementById('modal').classList.remove('open');
+  modalLeadId = null;
+}
+
+function salvarNota() {
+  if (!modalLeadId) return;
+  const lista = CRM.todos();
+  const lead = lista.find(l => l.id === modalLeadId);
+  if (lead) { lead.notas = document.getElementById('modal-notas').value; }
+  localStorage.setItem('cr_leads', JSON.stringify(lista));
+  fecharModal();
+}
+
+document.getElementById('modal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) fecharModal();
+});
+
+// Atalho de teclado: Esc fecha modal
+document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharModal(); });
+
+renderizar();
+</script>
+</body>
+</html>
