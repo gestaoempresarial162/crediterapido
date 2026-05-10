@@ -38,9 +38,9 @@ const CRM = (() => {
     const rendaNegativado = /aposentado|inss|aut|mei/i.test(renda || '');
     const negativadoProvavel = taxa >= 5 || valor <= 3000 || rendaNegativado;
     if (negativadoProvavel) {
-      return { url: '/blog/emprestimo-com-nome-sujo.html', label: 'Empréstimo com nome sujo' };
+      return { url: '/blog/emprestimo-com-nome-sujo/', label: 'Empréstimo com nome sujo' };
     }
-    return { url: '/blog/como-aumentar-score.html', label: 'Como aumentar seu score' };
+    return { url: '/blog/como-aumentar-score/', label: 'Como aumentar seu score' };
   }
 
   return { capturar, rotearArtigo };
