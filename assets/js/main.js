@@ -6,7 +6,7 @@
    Cole aqui a URL do seu Google Apps Script (Web App)
    depois de seguir o tutorial em /INSTRUCOES.md
 -------------------------------------------------- */
-const GOOGLE_SHEETS_ENDPOINT = "COLE_AQUI_A_URL_DO_SEU_APPS_SCRIPT";
+const GOOGLE_SHEETS_ENDPOINT = "https://script.google.com/macros/s/AKfycbzzAdn_kKOr8eLchbZAX8300JWpaWSeFd5NDAiYLj86b_sCVbS1P1x8vF4dsR0-TeP3NA/exec";
 
 // ---------- MENU MOBILE ----------
 document.addEventListener('DOMContentLoaded', () => {
