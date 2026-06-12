@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ache Crédito | Simule Empréstimos e Encontre o Melhor Crédito para Você</title>
+  <meta name="description" content="Simule taxas de empréstimo pessoal, cartão de crédito, consignado e mais. Compare opções de crédito pré-aprovado, rápido e sem complicação.">
+  <link rel="canonical" href="https://www.achecredito.com.br/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Ache Crédito | Simule e Encontre o Melhor Crédito">
+  <meta property="og:description" content="Simule taxas, compare opções e encontre crédito pré-aprovado de forma rápida e segura.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.achecredito.com.br/">
+  <meta property="og:locale" content="pt_BR">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Ache Crédito",
+    "url": "https://www.achecredito.com.br/",
+    "description": "Portal de educação financeira e comparação de crédito."
+  }
+  </script>
+
+  <!-- Google tag (gtag.js) - GA4 -->
+  <!-- Substitua G-XXXXXXXXXX pelo seu ID do GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  <!-- Google Tag Manager -->
+  <!-- Substitua GTM-XXXXXXX pelo seu ID do GTM -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Ache<span>Crédito</span></a>
+      <nav class="main-nav">
+        <a href="emprestimo-pessoal.html">Empréstimo Pessoal</a>
+        <a href="cartao-de-credito.html">Cartões de Crédito</a>
+        <a href="educacao-financeira.html">Educação Financeira</a>
+        <a href="blog.html">Blog</a>
+        <a href="ofertas.html" class="nav-cta">Simular Agora</a>
+      </nav>
+      <button class="menu-toggle" aria-label="Abrir menu">☰</button>
+    </div>
+  </header>
+
+  <!-- HERO + SIMULADOR -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <span class="eyebrow">✓ 100% Gratuito e Online</span>
+        <h1>Encontre o crédito ideal para você em poucos minutos</h1>
+        <p>Simule taxas de empréstimo, cartões e consignado, e descubra opções pré-aprovadas com bancos parceiros. Rápido, fácil e sem compromisso.</p>
+        <div class="trust-badges">
+          <div class="trust-badge">
+            <strong>+50</strong>
+            <span>instituições parceiras</span>
+          </div>
+          <div class="trust-badge">
+            <strong>5 min</strong>
+            <span>para simular</span>
+          </div>
+          <div class="trust-badge">
+            <strong>100%</strong>
+            <span>online e gratuito</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="simulator-card">
+        <h3>Simulador de taxas</h3>
+        <p class="sub">Veja uma estimativa da sua parcela antes de solicitar.</p>
+
+        <form id="simulator-form">
+          <div class="form-group">
+            <label for="sim-tipo">Tipo de crédito</label>
+            <select id="sim-tipo" required>
+              <option value="pessoal">Empréstimo Pessoal</option>
+              <option value="consignado">Crédito Consignado</option>
+              <option value="cartao">Cartão de Crédito (rotativo)</option>
+              <option value="refinanciamento">Refinanciamento de Dívidas</option>
+              <option value="empresarial">Crédito Empresarial</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <div class="range-row">
+              <label for="sim-valor">Valor desejado</label>
+              <span class="value" id="sim-valor-display">R$ 5.000</span>
+            </div>
+            <input type="range" id="sim-valor" min="500" max="50000" step="500" value="5000">
+          </div>
+
+          <div class="form-group">
+            <div class="range-row">
+              <label for="sim-prazo">Prazo de pagamento</label>
+              <span class="value" id="sim-prazo-display">12x</span>
+            </div>
+            <input type="range" id="sim-prazo" min="6" max="60" step="6" value="12">
+          </div>
+
+          <button type="submit" class="btn">Simular minha taxa</button>
+        </form>
+
+        <div class="sim-result" id="sim-result">
+          <div class="sim-result-row">
+            <span>Taxa estimada</span>
+            <span id="sim-taxa">—</span>
+          </div>
+          <div class="sim-result-row">
+            <span>Total a pagar</span>
+            <span id="sim-total">—</span>
+          </div>
+          <div class="sim-result-row">
+            <span>Parcela mensal</span>
+            <span id="sim-parcela">—</span>
+          </div>
+
+          <div style="margin-top: 1rem;">
+            <div class="range-row">
+              <span style="font-size:0.85rem; font-weight:600;">Chance estimada de pré-aprovação</span>
+              <span class="value" id="sim-score-value">—</span>
+            </div>
+            <div class="score-bar"><div class="score-bar-fill" id="sim-score-fill"></div></div>
+          </div>
+
+          <a href="ofertas.html" class="btn btn-secondary" style="margin-top: 1rem;">Quero esse crédito →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODALIDADES -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Modalidades</span>
+        <h2>Qual tipo de crédito você procura?</h2>
+        <p>Escolha a opção que melhor se encaixa na sua necessidade e veja ofertas pré-aprovadas de parceiros.</p>
+      </div>
+      <div class="modality-grid">
+        <a href="ofertas.html?modalidade=pessoal" class="modality-card" style="text-decoration:none; color: inherit;">
+          <div class="icon">💰</div>
+          <h4>Empréstimo Pessoal</h4>
+        </a>
+        <a href="ofertas.html?modalidade=cartao" class="modality-card" style="text-decoration:none; color: inherit;">
+          <div class="icon">💳</div>
+          <h4>Cartão de Crédito</h4>
+        </a>
+        <a href="ofertas.html?modalidade=negativados" class="modality-card" style="text-decoration:none; color: inherit;">
+          <div class="icon">🛡️</div>
+          <h4>Negativados</h4>
+        </a>
+        <a href="ofertas.html?modalidade=refinanciamento" class="modality-card" style="text-decoration:none; color: inherit;">
+          <div class="icon">🔄</div>
+          <h4>Refinanciamento</h4>
+        </a>
+        <a href="ofertas.html?modalidade=consignado" class="modality-card" style="text-decoration:none; color: inherit;">
+          <div class="icon">📋</div>
+          <h4>Consignado</h4>
+        </a>
+        <a href="ofertas.html?modalidade=empresarial" class="modality-card" style="text-decoration:none; color: inherit;">
+          <div class="icon">🏢</div>
+          <h4>Crédito Empresarial</h4>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTIGOS -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Aprenda mais</span>
+        <h2>Guias de educação financeira</h2>
+        <p>Conteúdo gratuito para te ajudar a tomar decisões financeiras mais seguras.</p>
+      </div>
+      <div class="card-grid">
+
+        <a href="artigos/como-funciona-simulador-de-taxas.html" class="article-card" style="text-decoration:none;">
+          <div class="card-img">📊</div>
+          <div class="card-body">
+            <span class="tag">Simulador</span>
+            <h3>Como funciona um simulador de taxas de crédito?</h3>
+            <p>Entenda como os simuladores calculam parcelas, juros e CET, e use isso a seu favor.</p>
+            <span class="read-more">Ler artigo →</span>
+          </div>
+        </a>
+
+        <a href="artigos/quitar-dividas-vale-mais-a-pena.html" class="article-card" style="text-decoration:none;">
+          <div class="card-img">📉</div>
+          <div class="card-body">
+            <span class="tag">Dívidas</span>
+            <h3>Quitar ou renegociar: o que vale mais a pena?</h3>
+            <p>Compare as opções e descubra qual estratégia reduz mais o valor final da sua dívida.</p>
+            <span class="read-more">Ler artigo →</span>
+          </div>
+        </a>
+
+        <a href="artigos/educacao-financeira-nao-entrar-em-dividas.html" class="article-card" style="text-decoration:none;">
+          <div class="card-img">🎓</div>
+          <div class="card-body">
+            <span class="tag">Educação Financeira</span>
+            <h3>5 hábitos para nunca mais entrar em dívidas</h3>
+            <p>Práticas simples de organização financeira que qualquer pessoa pode aplicar hoje.</p>
+            <span class="read-more">Ler artigo →</span>
+          </div>
+        </a>
+
+        <a href="artigos/credito-consignado-vale-a-pena.html" class="article-card" style="text-decoration:none;">
+          <div class="card-img">📋</div>
+          <div class="card-body">
+            <span class="tag">Consignado</span>
+            <h3>Crédito consignado: vale a pena em 2026?</h3>
+            <p>Veja vantagens, riscos e para quem essa modalidade realmente compensa.</p>
+            <span class="read-more">Ler artigo →</span>
+          </div>
+        </a>
+
+        <a href="artigos/score-credito-como-melhorar.html" class="article-card" style="text-decoration:none;">
+          <div class="card-img">⭐</div>
+          <div class="card-body">
+            <span class="tag">Score</span>
+            <h3>Como melhorar seu score de crédito em 90 dias</h3>
+            <p>Passos práticos para aumentar sua pontuação e conseguir taxas melhores.</p>
+            <span class="read-more">Ler artigo →</span>
+          </div>
+        </a>
+
+        <a href="artigos/cartao-credito-uso-consciente.html" class="article-card" style="text-decoration:none;">
+          <div class="card-img">💳</div>
+          <div class="card-body">
+            <span class="tag">Cartão de Crédito</span>
+            <h3>Cartão de crédito: como usar sem cair na armadilha do rotativo</h3>
+            <p>Dicas essenciais para usar o cartão como aliado, e não como vilão do orçamento.</p>
+            <span class="read-more">Ler artigo →</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMULÁRIO DE LEAD -->
+  <section class="section lead-form-section" id="simular">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Pré-aprovação</span>
+        <h2>Receba ofertas personalizadas de crédito</h2>
+        <p>Preencha o formulário e veja opções pré-aprovadas de acordo com o seu perfil.</p>
+      </div>
+
+      <form class="lead-form" id="lead-form">
+        <input type="hidden" id="lead-modalidade" value="">
+
+        <div class="form-group">
+          <label for="lead-tipo-select">Tipo de crédito</label>
+          <select id="lead-tipo-select" onchange="document.getElementById('lead-modalidade').value=this.value" required>
+            <option value="">Selecione...</option>
+            <option value="pessoal">Empréstimo Pessoal</option>
+            <option value="cartao">Cartão de Crédito</option>
+            <option value="negativados">Crédito para Negativados</option>
+            <option value="refinanciamento">Refinanciamento de Dívidas</option>
+            <option value="consignado">Crédito Consignado</option>
+            <option value="empresarial">Crédito Empresarial</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="lead-nome">Nome completo</label>
+            <input type="text" id="lead-nome" placeholder="Seu nome" required>
+          </div>
+          <div class="form-group">
+            <label for="lead-email">E-mail</label>
+            <input type="email" id="lead-email" placeholder="seu@email.com" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="lead-telefone">Telefone / WhatsApp</label>
+            <input type="tel" id="lead-telefone" placeholder="(11) 99999-9999" required>
+          </div>
+          <div class="form-group">
+            <label for="lead-valor">Valor desejado</label>
+            <input type="number" id="lead-valor" placeholder="R$ 5.000" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="lead-cidade">Cidade</label>
+          <input type="text" id="lead-cidade" placeholder="Sua cidade">
+        </div>
+
+        <button type="submit" class="btn">Ver minhas ofertas</button>
+
+        <div class="disclaimer-box">
+          Ao continuar, você concorda com nossos <a href="termos-de-uso.html">Termos de Uso</a> e
+          <a href="politica-de-privacidade.html">Política de Privacidade</a>. Não solicitamos pagamento
+          para liberar crédito.
+        </div>
+      </form>
+
+      <div class="form-success" id="form-success">
+        <div class="icon">✅</div>
+        <h3>Recebemos seus dados!</h3>
+        <p>Confira abaixo as ofertas pré-selecionadas para o seu perfil:</p>
+        <div class="offers-list" id="offers-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Dúvidas frequentes</span>
+        <h2>Perguntas frequentes</h2>
+      </div>
+      <div style="max-width: 720px; margin: 0 auto;">
+
+        <div class="faq-item open">
+          <div class="faq-question"><span>O simulador é gratuito?</span><span class="faq-toggle">+</span></div>
+          <div class="faq-answer"><p>Sim, totalmente gratuito. Você pode simular quantas vezes quiser, sem custo e sem compromisso.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question"><span>Preciso pagar algo para receber o crédito?</span><span class="faq-toggle">+</span></div>
+          <div class="faq-answer"><p>Não. O Ache Crédito nunca solicita pagamento para liberar crédito. Se alguém pedir isso em seu nome, desconfie e não envie dinheiro.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question"><span>Como funciona a pré-aprovação?</span><span class="faq-toggle">+</span></div>
+          <div class="faq-answer"><p>Com base nos dados informados, mostramos uma estimativa de chance de aprovação e conectamos você às instituições parceiras mais adequadas ao seu perfil.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question"><span>Meus dados estão seguros?</span><span class="faq-toggle">+</span></div>
+          <div class="faq-answer"><p>Sim. Utilizamos seus dados apenas para conectar você às ofertas de crédito, conforme nossa <a href="politica-de-privacidade.html">Política de Privacidade</a>, em conformidade com a LGPD.</p></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">AcheCrédito</div>
+          <p style="color: var(--color-bg-alt); opacity: 0.8; font-size: 0.9rem; max-width: 320px;">
+            Portal de comparação de crédito e educação financeira. Ajudamos você a encontrar as melhores opções do mercado, de forma rápida e gratuita.
+          </p>
+        </div>
+        <div>
+          <h4>Modalidades</h4>
+          <a href="emprestimo-pessoal.html">Empréstimo Pessoal</a>
+          <a href="cartao-de-credito.html">Cartões de Crédito</a>
+          <a href="ofertas.html?modalidade=consignado">Consignado</a>
+          <a href="ofertas.html?modalidade=negativados">Negativados</a>
+        </div>
+        <div>
+          <h4>Conteúdo</h4>
+          <a href="blog.html">Blog</a>
+          <a href="educacao-financeira.html">Educação Financeira</a>
+          <a href="ofertas.html">Simular Agora</a>
+        </div>
+        <div>
+          <h4>Institucional</h4>
+          <a href="sobre.html">Sobre Nós</a>
+          <a href="contato.html">Contato</a>
+          <a href="politica-de-privacidade.html">Política de Privacidade</a>
+          <a href="termos-de-uso.html">Termos de Uso</a>
+        </div>
+      </div>
+
+      <div class="footer-disclaimer">
+        <strong>Aviso Legal:</strong> O Ache Crédito é um site de comparação independente e não é uma instituição financeira.
+        Não realizamos a concessão direta de crédito. As taxas exibidas no simulador são estimativas e podem variar de acordo
+        com a análise de crédito de cada instituição parceira. Em nenhuma hipótese o Ache Crédito solicita pagamento antecipado
+        para liberação de crédito — caso isso ocorra, entre em contato conosco imediatamente.
+        <br><br>
+        <strong>Divulgação:</strong> Este site pode receber comissões por indicações de produtos financeiros exibidos. Essa
+        compensação não influencia nossas avaliações editoriais.
+      </div>
+
+      <div class="footer-bottom">
+        © 2026 Ache Crédito. Todos os direitos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
