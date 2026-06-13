@@ -20,7 +20,85 @@ document.addEventListener('DOMContentLoaded', () => {
   initLeadForm();
   initFAQ();
   initModalitySelector();
+  initObrigadoPage();
 });
+
+// ---------- VALIDAÇÕES ----------
+
+// Valida formato de e-mail
+function isValidEmail(email) {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(String(email).trim());
+}
+
+// Valida CPF (formato + dígitos verificadores)
+function isValidCPF(cpf) {
+  cpf = String(cpf).replace(/[^\d]/g, '');
+  if (cpf.length !== 11) return false;
+  if (/^(\d)\1{10}$/.test(cpf)) return false; // todos os dígitos iguais
+
+  let sum = 0;
+  for (let i = 0; i < 9; i++) sum += parseInt(cpf.charAt(i)) * (10 - i);
+  let rev = 11 - (sum % 11);
+  if (rev === 10 || rev === 11) rev = 0;
+  if (rev !== parseInt(cpf.charAt(9))) return false;
+
+  sum = 0;
+  for (let i = 0; i < 10; i++) sum += parseInt(cpf.charAt(i)) * (11 - i);
+  rev = 11 - (sum % 11);
+  if (rev === 10 || rev === 11) rev = 0;
+  if (rev !== parseInt(cpf.charAt(10))) return false;
+
+  return true;
+}
+
+// Valida telefone brasileiro (10 ou 11 dígitos, com DDD)
+function isValidPhone(phone) {
+  const digits = String(phone).replace(/[^\d]/g, '');
+  return digits.length === 10 || digits.length === 11;
+}
+
+// Máscara de CPF: 000.000.000-00
+function maskCPF(value) {
+  return value
+    .replace(/\D/g, '')
+    .slice(0, 11)
+    .replace(/(\d{3})(\d)/, '$1.$2')
+    .replace(/(\d{3})(\d)/, '$1.$2')
+    .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+}
+
+// Máscara de telefone: (00) 00000-0000
+function maskPhone(value) {
+  const digits = value.replace(/\D/g, '').slice(0, 11);
+  if (digits.length <= 10) {
+    return digits
+      .replace(/(\d{2})(\d)/, '($1) $2')
+      .replace(/(\d{4})(\d)/, '$1-$2');
+  }
+  return digits
+    .replace(/(\d{2})(\d)/, '($1) $2')
+    .replace(/(\d{5})(\d)/, '$1-$2');
+}
+
+// Exibe mensagem de erro abaixo de um campo
+function showFieldError(input, message) {
+  clearFieldError(input);
+  input.style.borderColor = 'var(--color-error)';
+  const error = document.createElement('div');
+  error.className = 'field-error';
+  error.style.color = 'var(--color-error)';
+  error.style.fontSize = '0.8rem';
+  error.style.marginTop = '0.3rem';
+  error.textContent = message;
+  input.parentElement.appendChild(error);
+}
+
+function clearFieldError(input) {
+  input.style.borderColor = '';
+  const existing = input.parentElement.querySelector('.field-error');
+  if (existing) existing.remove();
+}
 
 // ---------- FAQ ACCORDION ----------
 function initFAQ() {
@@ -57,7 +135,7 @@ function initSimulator() {
     refinanciamento: 0.0249,
     empresarial: 0.0299
   };
-   
+
   function updateDisplays() {
     if (valorDisplay) {
       valorDisplay.textContent = Number(valorInput.value).toLocaleString('pt-BR', {
@@ -164,6 +242,7 @@ const OFERTAS = {
     { nome: "Stone Crédito Empresarial", desc: "Antecipação de recebíveis e capital de giro.", link: "#" }
   ]
 };
+
 const MODALIDADE_LABELS = {
   cartao: "Cartão de Crédito",
   pessoal: "Empréstimo Pessoal",
@@ -174,17 +253,101 @@ const MODALIDADE_LABELS = {
   negativados: "Crédito para Negativados",
   empresarial: "Crédito Empresarial"
 };
+
 // ---------- FORMULÁRIO DE LEAD ----------
+let formStartTracked = false;
+let formSubmitted = false;
+let currentFormData = {};
+
 function initLeadForm() {
   const form = document.getElementById('lead-form');
   if (!form) return;
 
-  const successBox = document.getElementById('form-success');
-  const offersList = document.getElementById('offers-list');
   const submitBtn = form.querySelector('button[type="submit"]');
+  const nomeInput = document.getElementById('lead-nome');
+  const emailInput = document.getElementById('lead-email');
+  const telefoneInput = document.getElementById('lead-telefone');
+  const cpfInput = document.getElementById('lead-cpf');
 
+  // Aplica máscaras em tempo real
+  if (cpfInput) {
+    cpfInput.addEventListener('input', (e) => {
+      e.target.value = maskCPF(e.target.value);
+    });
+  }
+  if (telefoneInput) {
+    telefoneInput.addEventListener('input', (e) => {
+      e.target.value = maskPhone(e.target.value);
+    });
+  }
+
+  // ---------- EVENTO: form_start (primeira interação) ----------
+  const trackFormStart = () => {
+    if (formStartTracked) return;
+    formStartTracked = true;
+
+    if (typeof gtag === 'function') {
+      gtag('event', 'form_start', {
+        modalidade: document.getElementById('lead-modalidade')?.value || ''
+      });
+    }
+    if (typeof dataLayer !== 'undefined') {
+      dataLayer.push({ event: 'form_start' });
+    }
+  };
+
+  [nomeInput, emailInput, telefoneInput, cpfInput].forEach(input => {
+    if (input) input.addEventListener('focus', trackFormStart, { once: false });
+  });
+
+  // ---------- TRACKING DE ABANDONO (ao saltar a aba/fechar) ----------
+  window.addEventListener('beforeunload', () => {
+    if (formStartTracked && !formSubmitted) {
+      registrarAbandono();
+    }
+  });
+
+  // Também registra abandono se o usuário ficar 30s inativo após iniciar
+  let abandonTimer = null;
+  const resetAbandonTimer = () => {
+    if (abandonTimer) clearTimeout(abandonTimer);
+    if (formStartTracked && !formSubmitted) {
+      abandonTimer = setTimeout(() => {
+        registrarAbandono();
+      }, 45000); // 45 segundos de inatividade
+    }
+  };
+  [nomeInput, emailInput, telefoneInput, cpfInput].forEach(input => {
+    if (input) input.addEventListener('input', resetAbandonTimer);
+  });
+
+  function registrarAbandono() {
+    const data = {
+      tipo: 'abandono',
+      nome: nomeInput?.value || '',
+      email: emailInput?.value || '',
+      telefone: telefoneInput?.value || '',
+      cpf: cpfInput?.value || '',
+      modalidade: document.getElementById('lead-modalidade')?.value || '',
+      modalidadeLabel: MODALIDADE_LABELS[document.getElementById('lead-modalidade')?.value] || '',
+      dataEnvio: new Date().toLocaleString('pt-BR'),
+      origem: window.location.pathname
+    };
+
+    // Só registra se a pessoa preencheu pelo menos nome ou e-mail
+    if (!data.nome && !data.email) return;
+
+    sendToGoogleSheets(data, 'abandono').catch(() => {});
+  }
+
+  // ---------- SUBMIT ----------
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    // Limpa erros anteriores
+    [nomeInput, emailInput, telefoneInput, cpfInput].forEach(input => {
+      if (input) clearFieldError(input);
+    });
 
     const modalidade = document.getElementById('lead-modalidade').value;
     if (!modalidade) {
@@ -192,10 +355,48 @@ function initLeadForm() {
       return;
     }
 
+    let valid = true;
+
+    // Validação de e-mail
+    if (!emailInput.value || !isValidEmail(emailInput.value)) {
+      showFieldError(emailInput, 'Digite um e-mail válido.');
+      valid = false;
+    }
+
+    // Validação de CPF
+    if (cpfInput) {
+      if (!cpfInput.value || !isValidCPF(cpfInput.value)) {
+        showFieldError(cpfInput, 'Digite um CPF válido.');
+        valid = false;
+      }
+    }
+
+    // Validação de telefone
+    if (!telefoneInput.value || !isValidPhone(telefoneInput.value)) {
+      showFieldError(telefoneInput, 'Digite um telefone válido com DDD.');
+      valid = false;
+    }
+
+    // Validação de nome
+    if (!nomeInput.value || nomeInput.value.trim().length < 3) {
+      showFieldError(nomeInput, 'Digite seu nome completo.');
+      valid = false;
+    }
+
+    if (!valid) {
+      // Rola até o primeiro campo com erro
+      const firstError = form.querySelector('.field-error');
+      if (firstError) {
+        firstError.closest('.form-group')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
+
     const data = {
-      nome: document.getElementById('lead-nome').value,
-      email: document.getElementById('lead-email').value,
-      telefone: document.getElementById('lead-telefone').value,
+      nome: nomeInput.value.trim(),
+      email: emailInput.value.trim(),
+      telefone: telefoneInput.value.trim(),
+      cpf: cpfInput ? cpfInput.value.trim() : '',
       cidade: document.getElementById('lead-cidade')?.value || '',
       valorDesejado: document.getElementById('lead-valor')?.value || '',
       modalidade: modalidade,
@@ -208,31 +409,23 @@ function initLeadForm() {
     submitBtn.textContent = 'Enviando...';
 
     try {
-      await sendToGoogleSheets(data);
+      await sendToGoogleSheets(data, 'lead');
     } catch (err) {
       console.error('Erro ao enviar para a planilha:', err);
       // Continua o fluxo mesmo se o envio falhar, para não travar a experiência do usuário.
     }
 
-    // Disparo de evento para GA4 / GTM (conversão de lead)
-    if (typeof gtag === 'function') {
-      gtag('event', 'generate_lead', {
-        modalidade: data.modalidade,
-        valor_estimado: data.valorDesejado
-      });
-    }
-    if (typeof dataLayer !== 'undefined') {
-      dataLayer.push({ event: 'lead_form_submit', modalidade: data.modalidade });
+    formSubmitted = true;
+
+    // Salva os dados temporariamente para a página /obrigado renderizar as ofertas
+    try {
+      sessionStorage.setItem('acheCreditoLead', JSON.stringify(data));
+    } catch (e) {
+      // sessionStorage pode falhar em alguns navegadores/modos privados — segue com query string
     }
 
-    // Mostrar ofertas correspondentes
-    renderOffers(modalidade, offersList);
-
-    form.style.display = 'none';
-    successBox.classList.add('active');
-
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Ver minhas ofertas';
+    // Redireciona para a página de obrigado com a modalidade na URL
+    window.location.href = 'obrigado.html?modalidade=' + encodeURIComponent(modalidade);
   });
 }
 
@@ -247,22 +440,84 @@ function renderOffers(modalidade, container) {
         <div class="offer-name">${oferta.nome}</div>
         <div class="offer-desc">${oferta.desc}</div>
       </div>
-      <a href="${oferta.link}" class="btn" target="_blank" rel="noopener sponsored">Ver oferta</a>
+      <a href="${oferta.link}" class="btn offer-link" target="_blank" rel="noopener sponsored" data-oferta="${oferta.nome}" data-modalidade="${modalidade}">Ver oferta</a>
     `;
     container.appendChild(div);
   });
+
+  // Evento de clique em oferta (para remarketing/segmentação por parceiro)
+  container.querySelectorAll('.offer-link').forEach(link => {
+    link.addEventListener('click', () => {
+      const oferta = link.dataset.oferta;
+      const mod = link.dataset.modalidade;
+
+      if (typeof gtag === 'function') {
+        gtag('event', 'click_offer', {
+          modalidade: mod,
+          parceiro: oferta
+        });
+      }
+      if (typeof dataLayer !== 'undefined') {
+        dataLayer.push({ event: 'click_offer', modalidade: mod, parceiro: oferta });
+      }
+    });
+  });
+}
+
+// ---------- PÁGINA /obrigado ----------
+function initObrigadoPage() {
+  const container = document.getElementById('obrigado-offers');
+  if (!container) return;
+
+  const params = new URLSearchParams(window.location.search);
+  let modalidade = params.get('modalidade') || '';
+  let leadData = null;
+
+  try {
+    const stored = sessionStorage.getItem('acheCreditoLead');
+    if (stored) leadData = JSON.parse(stored);
+  } catch (e) {}
+
+  if (leadData && leadData.modalidade) {
+    modalidade = leadData.modalidade;
+  }
+
+  const modalidadeLabelEl = document.getElementById('obrigado-modalidade');
+  if (modalidadeLabelEl) {
+    modalidadeLabelEl.textContent = MODALIDADE_LABELS[modalidade] || 'crédito';
+  }
+
+  renderOffers(modalidade, container);
+
+  // Evento de conversão principal (GA4 + GTM) na página de obrigado
+  if (typeof gtag === 'function') {
+    gtag('event', 'generate_lead', {
+      modalidade: modalidade,
+      valor_estimado: leadData?.valorDesejado || ''
+    });
+  }
+  if (typeof dataLayer !== 'undefined') {
+    dataLayer.push({ event: 'lead_conversion', modalidade: modalidade });
+  }
+
+  // Limpa o sessionStorage após uso
+  try {
+    sessionStorage.removeItem('acheCreditoLead');
+  } catch (e) {}
 }
 
 // ---------- ENVIO PARA GOOGLE SHEETS ----------
-async function sendToGoogleSheets(data) {
+async function sendToGoogleSheets(data, tipo) {
   if (!GOOGLE_SHEETS_ENDPOINT || GOOGLE_SHEETS_ENDPOINT.startsWith('COLE_AQUI')) {
     console.warn('GOOGLE_SHEETS_ENDPOINT não configurado. Veja INSTRUCOES.md');
     return;
   }
 
+  const payload = Object.assign({}, data, { tipoRegistro: tipo || 'lead' });
+
   // Usamos no-cors + form-encoded porque Apps Script Web Apps
   // costumam ter problemas com preflight CORS em JSON.
-  const formBody = new URLSearchParams(data).toString();
+  const formBody = new URLSearchParams(payload).toString();
 
   await fetch(GOOGLE_SHEETS_ENDPOINT, {
     method: 'POST',

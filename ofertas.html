@@ -35,26 +35,26 @@
   </script>
 
   <!-- Google tag (gtag.js) - GA4 -->
-  <!-- Substitua G-XXXXXXXXXX pelo seu ID do GA4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <!-- Substitua G-67699H2YEN pelo seu ID do GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-67699H2YEN"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
+    gtag('config', 'G-67699H2YEN');
   </script>
 
   <!-- Google Tag Manager -->
-  <!-- Substitua GTM-XXXXXXX pelo seu ID do GTM -->
+  <!-- Substitua GTM-KDW5CXD6 pelo seu ID do GTM -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+  })(window,document,'script','dataLayer','GTM-KDW5CXD6');</script>
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDW5CXD6"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <header class="site-header">
@@ -81,39 +81,40 @@
         <p>Selecione a modalidade desejada, preencha seus dados e veja ofertas pré-selecionadas de parceiros — sem custo e sem compromisso.</p>
       </div>
 
-      <div class="modality-card" data-modalidade="cartao">
-  <div class="icon">💳</div>
-  <h4>Cartão de Crédito</h4>
-</div>
-<div class="modality-card" data-modalidade="pessoal">
-  <div class="icon">💰</div>
-  <h4>Empréstimo Pessoal</h4>
-</div>
-<div class="modality-card" data-modalidade="consignado">
-  <div class="icon">📋</div>
-  <h4>Consignado</h4>
-</div>
-<div class="modality-card" data-modalidade="fgts">
-  <div class="icon">🏦</div>
-  <h4>Empréstimo FGTS</h4>
-</div>
-<div class="modality-card" data-modalidade="imobiliario">
-  <div class="icon">🏠</div>
-  <h4>Financiamento Imobiliário</h4>
-</div>
-<div class="modality-card" data-modalidade="refinanciamento">
-  <div class="icon">🔄</div>
-  <h4>Refinanciamento</h4>
-</div>
-<div class="modality-card" data-modalidade="negativados">
-  <div class="icon">🛡️</div>
-  <h4>Negativados</h4>
-</div>
-<div class="modality-card" data-modalidade="empresarial">
-  <div class="icon">🏢</div>
-  <h4>Crédito Empresarial</h4>
-
-</div>
+      <div class="modality-grid" style="margin-bottom: 2.5rem;">
+        <div class="modality-card" data-modalidade="cartao">
+          <div class="icon">💳</div>
+          <h4>Cartão de Crédito</h4>
+        </div>
+        <div class="modality-card" data-modalidade="pessoal">
+          <div class="icon">💰</div>
+          <h4>Empréstimo Pessoal</h4>
+        </div>
+        <div class="modality-card" data-modalidade="consignado">
+          <div class="icon">📋</div>
+          <h4>Consignado</h4>
+        </div>
+        <div class="modality-card" data-modalidade="fgts">
+          <div class="icon">🏦</div>
+          <h4>Empréstimo FGTS</h4>
+        </div>
+        <div class="modality-card" data-modalidade="imobiliario">
+          <div class="icon">🏠</div>
+          <h4>Financiamento Imobiliário</h4>
+        </div>
+        <div class="modality-card" data-modalidade="refinanciamento">
+          <div class="icon">🔄</div>
+          <h4>Refinanciamento</h4>
+        </div>
+        <div class="modality-card" data-modalidade="negativados">
+          <div class="icon">🛡️</div>
+          <h4>Negativados</h4>
+        </div>
+        <div class="modality-card" data-modalidade="empresarial">
+          <div class="icon">🏢</div>
+          <h4>Crédito Empresarial</h4>
+        </div>
+      </div>
 
       <form class="lead-form" id="lead-form">
         <input type="hidden" id="lead-modalidade" value="">
@@ -135,14 +136,20 @@
             <input type="tel" id="lead-telefone" placeholder="(11) 99999-9999" required>
           </div>
           <div class="form-group">
-            <label for="lead-valor">Valor desejado</label>
-            <input type="number" id="lead-valor" placeholder="R$ 5.000" required>
+            <label for="lead-cpf">CPF</label>
+            <input type="text" id="lead-cpf" placeholder="000.000.000-00" inputmode="numeric" required>
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="lead-cidade">Cidade</label>
-          <input type="text" id="lead-cidade" placeholder="Sua cidade">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="lead-valor">Valor desejado</label>
+            <input type="number" id="lead-valor" placeholder="R$ 5.000" required>
+          </div>
+          <div class="form-group">
+            <label for="lead-cidade">Cidade</label>
+            <input type="text" id="lead-cidade" placeholder="Sua cidade">
+          </div>
         </div>
 
         <button type="submit" class="btn">Ver minhas ofertas</button>
@@ -150,16 +157,10 @@
         <div class="disclaimer-box">
           Ao continuar, você concorda com nossos <a href="termos-de-uso.html">Termos de Uso</a> e
           <a href="politica-de-privacidade.html">Política de Privacidade</a>. Não solicitamos pagamento
-          para liberar crédito.
+          para liberar crédito. Seus dados são usados apenas para conectar você às ofertas de crédito
+          compatíveis com seu perfil.
         </div>
       </form>
-
-      <div class="form-success" id="form-success">
-        <div class="icon">✅</div>
-        <h3>Recebemos seus dados!</h3>
-        <p>Confira abaixo as ofertas pré-selecionadas para o seu perfil:</p>
-        <div class="offers-list" id="offers-list"></div>
-      </div>
     </div>
   </section>
 
