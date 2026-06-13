@@ -110,18 +110,76 @@ const OFERTAS = {
 
 ---
 
+## 🆕 NOVO: Aba "CRM" + Automação de E-mails (IA com Gemini)
+
+O `google-apps-script.gs` foi reescrito e agora cria automaticamente uma aba **"CRM"**, consolidando 1 linha por CPF com:
+
+| Coluna | O quê |
+|---|---|
+| Data Cadastro, CPF, Nome, E-mail, Telefone, Modalidade | dados básicos |
+| Virou Lead? | Sim/Não |
+| Empresas de Interesse | parceiros clicados (concatenados) |
+| Status Funil | Novo / Email 1 Enviado / Email 2 Enviado / etc. |
+| Data Abandono | se aplicável |
+| Email 1 / Email 2 Enviado em | controle automático |
+| Opt-out? / Data Opt-out | **preencha manualmente "Sim"** para parar envios a essa pessoa |
+| E-mail Bounced? | marcado automaticamente se o envio falhar |
+| Observações | livre, para suas anotações |
+
+### Regras de envio automático (a cada 6 horas)
+
+1. **Lead + clicou em oferta** → e-mail imediato (próxima execução do trigger) mencionando as empresas de interesse
+2. **Lead sem clique** → e-mail genérico 24h após o cadastro
+3. **Abandonou o formulário** → Email 1 de recuperação 30h depois
+4. **Email 1 enviado e não converteu** → Email 2 (follow-up) 48h depois
+5. **Coluna "Opt-out?" = Sim** → nunca mais recebe e-mails
+
+Os e-mails usam **templates fixos revisados em HTML** por padrão (`USAR_IA = false` no início do código) — já incluem menção ao blog e o aviso de opt-out discreto (fonte pequena, separado por espaço da assinatura). Se quiser usar o Gemini no lugar dos templates, mude `USAR_IA` para `true` e configure a `GEMINI_API_KEY` (veja abaixo).
+
+### Configuração passo a passo (faça isso DEPOIS de colar o novo código)
+
+**1. Ativar o trigger de tempo (roda a cada 6h automaticamente):**
+1. No editor, no topo, há um dropdown de funções (ao lado do botão "Run") — selecione **`setupTrigger`**
+2. Clique em **"Run"** (▶️)
+3. Na primeira vez, vai pedir autorização extra (porque agora o script envia e-mails e cria triggers) — autorize normalmente
+4. Pronto — o trigger fica configurado permanentemente (não precisa rodar de novo, a menos que você edite o código)
+
+**2. Fazer o Deploy normal (New version)** — mesmo processo de sempre.
+
+**3. (Opcional) Ativar IA (Gemini) no lugar dos templates fixos:**
+1. No topo do `google-apps-script.gs`, mude `var USAR_IA = false;` para `var USAR_IA = true;`
+2. No editor do Apps Script, clique no ícone de **engrenagem** (Configurações do projeto)
+3. Role até **"Propriedades do script"** → "Adicionar propriedade do script"
+4. Nome: `GEMINI_API_KEY` — Valor: sua chave (gerada em aistudio.google.com/app/apikey)
+5. Salvar e fazer novo Deploy
+
+### Como usar no dia a dia
+
+- **Para parar e-mails de uma pessoa específica:** vá na aba "CRM", encontre a linha pelo CPF/e-mail, escreva **"Sim"** na coluna "Opt-out?"
+- **Para ver quem está "travado" sem e-mail:** filtre a coluna "E-mail Bounced?" = "Sim" — esses contatos precisam ser abordados por telefone/WhatsApp
+- **Para acompanhar o funil:** a coluna "Status Funil" mostra em que etapa cada lead está
+
+### Testando a automação manualmente (sem esperar 6h)
+
+No editor do Apps Script, selecione a função **`runEmailAutomation`** no dropdown e clique "Run" — isso executa a verificação imediatamente (útil para testar).
+
+---
+
 ## Checklist final antes de divulgar
 
 - [x] GA4 configurado (G-67699H2YEN)
 - [x] GTM configurado (GTM-KDW5CXD6)
 - [x] Apps Script — URL conectada
-- [ ] Apps Script — código atualizado (ver seção "Ação necessária" acima)
-- [ ] Testar envio do formulário (verificar aba "Leads" na planilha)
-- [ ] Testar abandono (preencher nome/e-mail, fechar aba, verificar aba "Abandonos")
+- [ ] Apps Script — código atualizado (cole o novo google-apps-script.gs)
+- [ ] setupTrigger() executado uma vez (cria o agendamento de 6h)
+- [ ] Testar envio do formulário (verificar aba "Leads" e aba "CRM" na planilha)
+- [ ] Testar abandono (preencher nome/e-mail, fechar aba, verificar aba "Abandonos" e "CRM")
+- [ ] Testar runEmailAutomation manualmente (Run no editor) — confira o e-mail recebido
 - [ ] Links de ofertas atualizados com parceiros reais/afiliados
 - [ ] Configurar conversão generate_lead no Google Ads
 - [ ] Configurar público de remarketing no GA4
 - [ ] Solicitação enviada ao Google AdSense
+- [ ] (Opcional) Ativar USAR_IA + GEMINI_API_KEY se quiser e-mails gerados por IA
 
 ---
 
