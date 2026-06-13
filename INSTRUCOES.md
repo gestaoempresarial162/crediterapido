@@ -47,6 +47,13 @@ Se a pessoa começar a preencher o formulário (nome ou e-mail) mas **fechar a a
 
 Use essa lista para campanhas de remarketing/recuperação (ex: e-mail "ficou alguma dúvida no seu pedido de crédito?").
 
+### 4b. Aba "Cliques" na planilha
+Quando a pessoa, já na página `/obrigado`, clica em "Ver oferta" de algum parceiro, é criada uma linha na aba **"Cliques"** com: nome, e-mail, CPF, telefone, modalidade, nome do parceiro clicado e data/hora.
+
+Use essa aba para saber em qual produto cada lead demonstrou interesse — ótimo para e-mail marketing segmentado (ex: "vimos que você se interessou pelo Banco PAN FGTS...").
+
+Para cruzar com a aba "Leads", filtre/procure pelo mesmo e-mail ou CPF em ambas as abas (ex: usando `QUERY` ou `FILTER` no Google Sheets).
+
 ### 5. Campo CPF no formulário
 Adicionado em ambos os formulários (home e `/ofertas`). É enviado para a planilha junto com os demais dados.
 

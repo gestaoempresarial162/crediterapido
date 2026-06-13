@@ -429,7 +429,7 @@ function initLeadForm() {
   });
 }
 
-function renderOffers(modalidade, container) {
+function renderOffers(modalidade, container, leadInfo) {
   const ofertas = OFERTAS[modalidade] || [];
   container.innerHTML = '';
   ofertas.forEach(oferta => {
@@ -460,6 +460,21 @@ function renderOffers(modalidade, container) {
       if (typeof dataLayer !== 'undefined') {
         dataLayer.push({ event: 'click_offer', modalidade: mod, parceiro: oferta });
       }
+
+      // Registra o clique na planilha (aba "Cliques"), associando ao e-mail/CPF do lead
+      if (leadInfo && (leadInfo.email || leadInfo.cpf)) {
+        sendToGoogleSheets({
+          nome: leadInfo.nome || '',
+          email: leadInfo.email || '',
+          cpf: leadInfo.cpf || '',
+          telefone: leadInfo.telefone || '',
+          modalidade: mod,
+          modalidadeLabel: MODALIDADE_LABELS[mod] || mod,
+          parceiro: oferta,
+          dataEnvio: new Date().toLocaleString('pt-BR'),
+          origem: window.location.pathname
+        }, 'click_offer').catch(() => {});
+      }
     });
   });
 }
@@ -487,7 +502,7 @@ function initObrigadoPage() {
     modalidadeLabelEl.textContent = MODALIDADE_LABELS[modalidade] || 'crédito';
   }
 
-  renderOffers(modalidade, container);
+  renderOffers(modalidade, container, leadData);
 
   // Evento de conversão principal (GA4 + GTM) na página de obrigado
   if (typeof gtag === 'function') {
@@ -500,10 +515,9 @@ function initObrigadoPage() {
     dataLayer.push({ event: 'lead_conversion', modalidade: modalidade });
   }
 
-  // Limpa o sessionStorage após uso
-  try {
-    sessionStorage.removeItem('acheCreditoLead');
-  } catch (e) {}
+  // Mantém o sessionStorage durante a sessão na página /obrigado,
+  // para que cliques em ofertas possam ser associados ao e-mail/CPF do lead.
+  // É removido automaticamente quando a aba/sessão é fechada (sessionStorage nativo).
 }
 
 // ---------- ENVIO PARA GOOGLE SHEETS ----------

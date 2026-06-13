@@ -12,7 +12,10 @@ function doPost(e) {
   var params = e.parameter;
   var tipo = params.tipoRegistro || 'lead';
 
-  var sheetName = (tipo === 'abandono') ? 'Abandonos' : 'Leads';
+  var sheetName = 'Leads';
+  if (tipo === 'abandono') sheetName = 'Abandonos';
+  if (tipo === 'click_offer') sheetName = 'Cliques';
+
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName(sheetName);
 
@@ -31,6 +34,17 @@ function doPost(e) {
         "Telefone",
         "CPF",
         "Modalidade",
+        "Origem (página)"
+      ]);
+    } else if (tipo === 'click_offer') {
+      sheet.appendRow([
+        "Data/Hora",
+        "Nome",
+        "E-mail",
+        "CPF",
+        "Telefone",
+        "Modalidade",
+        "Parceiro Clicado",
         "Origem (página)"
       ]);
     } else {
@@ -56,6 +70,17 @@ function doPost(e) {
       params.telefone || "",
       params.cpf || "",
       params.modalidadeLabel || params.modalidade || "",
+      params.origem || ""
+    ]);
+  } else if (tipo === 'click_offer') {
+    sheet.appendRow([
+      params.dataEnvio || new Date().toLocaleString('pt-BR'),
+      params.nome || "",
+      params.email || "",
+      params.cpf || "",
+      params.telefone || "",
+      params.modalidadeLabel || params.modalidade || "",
+      params.parceiro || "",
       params.origem || ""
     ]);
   } else {
